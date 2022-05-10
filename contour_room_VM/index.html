@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- <link rel="stylesheet" type=“text/css“ href="contourweb.css"> -->
+		<title>Indoor Localization Accuracy Simulator</title>
+		<!-- <script src="plotly-2.8.3.min.js"></script> -->
+		<script src="contour_room_VM/plotly-2.8.3.min.js"></script>
+		
+		<style>
+
+:root {
+	--gap-line-spacing:5px;
+	--gap-line-spacing-authors:2px;
+	--darkest-color-titles:#545454;
+	--main-text-color:#003057;
+	--ligth-color-section-banner-bkg:#B3A369;;
+	--top-banner-color:#B3A369;
+	--gap-line-spacing-company:2px;
+	--page-background-color:#ffffff;
+	--table-border-color:#B3A369;
+	--section-banner-text-color:#003057;
+	--font-my-theme:Helvetica;
+	--gap-right-before-links:2em;
+}
+
+
+body {
+  margin: 0;
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+}
+
+.top-container {
+  background-color: var(--page-background-color);
+  padding: 0px;
+  text-align: center;
+  border-bottom:2px var(--main-text-color) solid;
+}
+
+.header {
+  padding: 0px 0px;
+  background: var(--top-banner-color);
+  color: #ffffff;
+}
+
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: block;
+}
+
+.sticky + .content {
+  padding-top: 102px;
+}
+
+.outer-container {
+	/*margin-left:calc((100% - 980px) / 2);*/
+	width:980px;
+	background-color: var(--page-background-color);
+}
+
+.perma-header-container {
+	/*margin-left:calc((100% - 980px) / 2);*/
+	width:980px;
+	background-color: var(--top-banner-color);
+}
+
+.scroll-header {
+	color: #ffffff;
+}
+
+.top-my-name {
+	font-family:var(--font-my-theme);
+	font-size:22pt;
+	color:var(--page-background-color);
+}
+
+.my-name-contrast {
+	font-family:var(--font-my-theme);
+	font-size:20pt;
+	color:#FFFFFF;
+}
+
+
+.top-content {
+	font-family:var(--font-my-theme);
+	font-size:14pt;
+	color:var(--page-background-color);
+}
+
+.top-invert-content {
+	font-family:var(--font-my-theme);
+	font-size:14pt;
+	color:var(--main-text-color);
+}
+
+
+.section-banner {
+	background-color: var(--ligth-color-section-banner-bkg);
+	color: var(--section-banner-text-color);
+	font-size:16pt;
+	padding:4px;
+	text-align:left;
+}
+
+/*--Styles for papers--*/
+
+.paper-title {
+	font-family:var(--font-my-theme);
+	font-size:12pt;
+	font-weight:600;
+	color:var(--darkest-color-titles);
+}
+
+.paper-me-author{
+	font-weight:bold;
+}
+.paper-authors{
+	font-family:var(--font-my-theme);
+	font-size:10pt;
+	color:var(--main-text-color);
+}
+
+.paper-conf {
+	font-family:var(--font-my-theme);
+	font-size:12pt;
+	color:var(--main-text-color);
+	font-weight:bold;
+}
+
+.paper-conf-year {
+	font-family:var(--font-my-theme);
+	font-size:10pt;
+	color:var(--main-text-color);
+}
+
+.hyperlink-papers-brackets {
+	font-family:var(--font-my-theme);
+	font-size:10pt;
+	color:var(--main-text-color);
+}
+
+a:link, a:visited { 
+    color: var(--main-text-color);
+    text-decoration: underline;
+}
+
+a:link:active, a:visited:active { 
+    color: var(--main-text-color);
+}
+
+.contrast-url + a {
+	color: var(--page-background-color);
+}
+.pub-outer-table{
+	border:solid var(--table-border-color) 1px;
+	table-layout: fixed;
+	width:100%;
+	
+}
+.pub-table {
+	table-layout: fixed;
+	width:100%;
+}
+.pub-tr-title{
+	padding-top:var(--gap-line-spacing);
+}
+.pub-tr-authors{
+	padding-top:var(--gap-line-spacing);
+}
+.pub-tr-conf{
+	padding-top:var(--gap-line-spacing);
+}
+.pub-td-title{
+	padding-top:var(--gap-line-spacing);
+	padding-right:var(--gap-right-before-links);
+}
+.pub-td-authors{
+	padding-top:var(--gap-line-spacing-authors);
+}
+.pub-td-conf{
+	padding-top:var(--gap-line-spacing);
+	width:9em;
+}
+.pub-td-links {
+	width:11em;
+	vertical-align:middle;
+}
+.space-between-authors {
+	font-size:6pt
+}
+.awards-tr{
+	padding-top:var(--gap-line-spacing);
+}
+.awards-td{
+	padding-top:var(--gap-line-spacing);
+}
+.awards-table{
+}
+.award-line{
+	font-family:var(--font-my-theme);
+	font-size:12pt;
+	color:var(--main-text-color);
+}
+.internship-table{
+	table-layout: fixed;
+	width:100%;
+}
+.company-name{
+	font-family:var(--font-my-theme);
+	font-size:12pt;
+	color:var(--main-text-color);
+	font-weight:bold;
+	
+	/*font-family:var(--font-my-theme);
+	font-size:12pt;
+	color:var(--darkest-color-titles);*/
+}
+.company-duration {
+	font-family:var(--font-my-theme);
+	font-size:10pt;
+	color:var(--main-text-color);
+}
+.company-work{
+	font-family:var(--font-my-theme);
+	font-size:12pt;
+	color:var(--main-text-color);
+}
+.company-work-long {
+	font-family:var(--font-my-theme);
+	font-size:10pt;
+	color:var(--main-text-color);
+}
+.company-designation{
+	font-family:var(--font-my-theme);
+	font-size:12pt;
+	color:var(--main-text-color);
+	font-weight:bold;
+}
+.internship-tr{
+	padding-top:var(--gap-line-spacing-company);
+}
+.internship-td{
+	padding-top:var(--gap-line-spacing-company);
+	padding-right:var(--gap-right-before-links);
+}
+.work-table{
+	table-layout: fixed;
+	width:100%;
+}
+.work-tr{
+	padding-top:var(--gap-line-spacing-company);
+}
+.work-td{
+	padding-top:var(--gap-line-spacing-company);
+	padding-right:var(--gap-right-before-links);
+}
+.company-td-links {
+	width:9em;
+	text-align:left;
+}
+.left-hr{
+	width:10%;
+	text-align:left;
+	margin-left:0;
+	border:solid 1px;
+	color:var(--main-text-color);
+}
+.center-hr{
+	width:10%;
+	text-align:center;
+	border:solid 1px;
+	color:var(--main-text-color);
+}
+.small-icons {
+	height:20pt;
+}
+.small-icons-intel {
+	height:24pt;
+}
+.small-icons-nec {
+	height:14pt;
+}
+.small-icons-university {
+	height:40pt;
+}
+.hidden-section {
+	display:none;
+}
+.dull-footnote {
+	color:#e0e0e0;
+	font-size:8pt;
+}
+
+.tooltip {
+    #position: relative;
+    #display: inline-block;
+    border-bottom: 1px dashed black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 380px;
+    background-color: white;
+    color: var(--main-text-color);
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+	border:1px solid var(--main-text-color);
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+
+
+.tooltip_bib {
+    #position: relative;
+    #display: inline-block;
+    #border-bottom: 1px dashed black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip_bib .tooltiptext_bib {
+    visibility: hidden;
+    width: 140px;
+    background-color: white;
+    color: var(--main-text-color);
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+	border:1px solid var(--main-text-color);
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip_bib:hover .tooltiptext_bib {
+    visibility: visible;
+}
+
+
+
+</style>
+		
+		
+	</head>
+	<body>
+		<table class="work-table">
+			<tr>
+			<td align="center" >
+			<div class="outer-container" >
+			<div id = "container" onmouseover="change()">  
+			
+			
+			<!-- <label id="instruction" style="margin-left:100px;position:relative;font-size: 20px;">let us know your room size and anchor locations</label> -->
+			<!-- <div id = "userinput">
+				<input style = "padding: 10px;margin-left: 230px;width: 500px;font-size: 17px;font-family: Raleway;border: 1px solid #aaaaaa;" 
+					placeholder="e.g. anchorLoc=1500,1500;1500,2500;2500,1500;2500,2500&roomSize=4000*4000&gradient=0;3000;100&sampleDistance=200&maxErrShown=10000&iniSeed=roomCenter/origin/custom&customSeed=20,20&dop=all/best" id="line" name="input">
+			</div> -->
+			<div >
+				<!-- <img src="gtlogo.png" alt="gt_logo" style="width:250px; float:right"> -->
+				<img src="contour_room_VM/gtlogo.png" alt="gt_logo" style="width:250px; float:right">
+			</div>
+			<div>
+			<h1>Time-difference-of-arrival (TDoA) based Simulator for Accuracy of Indoor Localization</h1>
+			
+			</div>
+			<hr>
+			<br>
+			<br>
+			<table style="text-align:justify">
+			<tr>
+			<td colspan="4">
+			<div>
+			Indoor localization, just like GPS, allows people to navigate in indoor spaces. 
+			However, GPS signals cannot penetrate into indoor spaces. 
+			Hence, we need a different technology to perform indoor localization. 
+			The core principle that allows localization is distance measurements from known anchor points using a wireless technique known as time-of-flight.
+			Using multiple distance measurements it is possible to perform multi-lateration that computes the location using geometric constraints&#8212;solving intersection of circles.
+			If we want to enable scalable localization, we cannot expect client devices, such as mobile phones, to actively participate in this distance measurement with the anchors.
+			Client devices must instead infer the distance measurement based on signals emitted by the anchors without themselves transmitting any signal. 
+			With such constaints, we must rely on time-difference-of-arrival (TDoA) of wireless signals, and not on time-of-flight.
+			Use of TDoA changes the geometric constaints to that of solving for the intersection of hyperbolas.
+			Inherently, the placement of anchors in an indoor space affects how these hyperbolas intersect.
+			Since all distance measurements suffer from measurement errors, computation of the hyperbolic intesections is not exact, which results in different localization accuracy at different areas in an indoor space.
+			</div>
+			<div>
+			This website simulates the expected localization accuracy in an indoor space given the parameters of the room, locations of the anchors, and a few other parameters which define the errors experienced by the indoor localization technology. Since this is a simulation, it also depends on certain statistical parameters such as seed points, which anchors to consider when there are several anchors, and how intensive the simulation should be, in terms of sampling density and number of trials.
+			</div>
+			<div>
+			For your convenience, we have created four sample inputs, which you can modify to match your experiment. The results from those sample inputs are shown below.
+			</div>
+			</td>
+			</tr>
+			<tr>
+			<td align="center">
+			<b>Small Square</b><br>
+			<img src="contour_room_VM/ss.png" alt="small square" style="height:250px;">
+			</td>
+			<td align="center">
+			<b>Small Rectangle</b><br>
+			<img src="contour_room_VM/sr.png" alt="small square" style="height:250px;">
+			</td>
+			<td align="center">
+			<b>Large Square</b><br>
+			<img src="contour_room_VM/ls.png" alt="small square" style="height:250px;">
+			</td>
+			<td align="center">
+			<b>Large Rectangle</b><br>
+			<img src="contour_room_VM/lr.png" alt="small square" style="height:250px;">
+			</td>
+			</tr>
+			<tr>
+			<td colspan="4" style="text-align:justify">
+			<hr>
+			<br>
+			<div style="text-align:center"><label id="instruction" style="font-size: 24px;">Acknowledgements</label></div><br>
+			This research project, titled <b>"Synchronization-free Scalable Indoor Localization using UWB in Wireless Access Points"</b>, has been made possible through the generous support of Cisco Systems, Inc. through Research Project Addendum #26 under the Master Research Agreement between Cisco and Georgia Tech (148649).
+			<br><br>
+			<div style="text-align:center"><label id="instruction" style="font-size: 24px;">How to cite?</label></div><br>
+			If you find this website useful, please cite using the following citation: <br>
+			Zixin Yin, Haige Chen, Ashutosh Dhekne, "Time-difference-of-arrival (TDoA) based Simulation for Accuracy of Indoor Localization”, <i>indoorloc-sim.cc.gatech.edu</i>, 2022
+			<br><br>
+			<tt>@misc{yin_chen_dhekne_2022, title={Time-difference-of-arrival (TDoA) based Simulator for Accuracy of Indoor Localization}, url={http://indoorloc-sim.cc.gatech.edu/}, author={Yin, Zixin and Chen, Haige and Dhekne, Ashutosh}, year={2022}, month={Jan}} </tt>
+			<hr>
+			</td>
+			
+			
+			</tr>
+			</table>
+			<div id="title">
+				<label id="instruction" style="font-size: 30px;">Customize your settings below</label>
+				<br><label id="instruction" style="font-size: 15px;">All inputs use unit millimeter. Graph uses unit meter.</label>
+			</div>
+
+			<div id="readme">
+				<!-- <a href="readme.pdf" style="font-size: 20px">Read Me First</a> -->
+				<a href="contour_room_VM/readme.pdf" style="font-size: 20px">Read Me First</a>
+			</div>
+
+			
+
+			<div class="dropdown" style="margin-top: 30px">
+				<label id="instruction" style="font-size: 20px;">Pre-programmed Example Inputs: </label>
+
+				<select name="ex_inputs" id="ex_inputs">
+						<option value="ss" id="ss">Small Square</option>
+						<option value="sr" id="sr">Small Rectangular</option>
+						<option value="ls" id="ls">Large Square</option>
+						<option value="lr" id="lr">Large Rectangular</option>
+						<option value="ct">Custom</option>
+					<!-- </div> -->
+				</select>
+			</div>
+			<br>
+			<table width="200px">
+			<tr>
+			<td><hr></td><td style="text-align:center" width="8em"> OR </td><td><hr></td>
+			</tr>
+			</table>
+			<br><br>
+			<table>
+				<tr>
+					<td>
+						<div class="paper-title" style="text-align:center">Anchor Locations</div>
+						<div class="paper-authors">Format: "x0,y0;x1,y1;x2,y2;x4,y4", where (x0,y0) are the coordinates for the initiator, and the others are the responders.</div></td><td><input type="text" style = "padding: 10px;width: 500px;font-size: 17px;font-family: Raleway;border: 1px solid #aaaaaa;" placeholder="e.g. 1500,1500;1500,2500;2500,1500;2500,2500" id="anchorloc" name="anchorloc">
+						<br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="paper-title" style="text-align:center">Room Size</div>
+						<div class="paper-authors">Format: "width*height", where width is the x-axis, and height is the y-axis.</div></td><td><input type="text" style = "padding: 10px;width: 500px;font-size: 17px;font-family: Raleway;border: 1px solid #aaaaaa;" 
+					placeholder="e.g. 4000*4000" id="roomsize" name="roomsize">	
+					<br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="paper-title" style="text-align:center">Sample Density</div>
+						<div class="paper-authors">Format: "distance", indicating the distance between two sample points.</div></td><td><input type="text" style = "padding: 10px;width: 500px;font-size: 17px;font-family: Raleway;border: 1px solid #aaaaaa;" 
+					placeholder="e.g. 200" id="sampledistance" name="sampledistance">
+					<br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="paper-title" style="text-align:center">Gaussian Noise</div>
+						<div class="paper-authors">Format: "sigma", specifying the standard deviation of the noise to be added to the TDoA measurement for simulation.</div></td><td><input type="text" style = "padding: 10px;width: 500px;font-size: 17px;font-family: Raleway;border: 1px solid #aaaaaa;" 
+					placeholder="e.g. 50" id="sigma" name="sigma">
+					<br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="paper-title" style="text-align:center">Max Error Limit</div>
+						<div class="paper-authors">All errors larger than this will be represented with the same color as that of the limit.</div></td><td><input type="text" style = "padding: 10px;width: 500px;font-size: 17px;font-family: Raleway;border: 1px solid #aaaaaa;" 
+					placeholder="e.g. 10000" id="maxerrshown" name="maxerrshown">
+					<br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="paper-title" style="text-align:center">Solver Seed Method</div>
+						<div class="paper-authors">Format: "roomCenter", "origin", or "custom". For non-convex optimizations, initial seed can affect the final outcome.</div></td><td><input type="text" style = "padding: 10px;width: 500px;font-size: 17px;font-family: Raleway;border: 1px solid #aaaaaa;" 
+					placeholder="e.g. origin/roomCenter/custom" id="iniseed" name="iniseed">
+					<br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="paper-title" style="text-align:center">Customize Initial Seed (if custom method)</div>
+						<div class="paper-authors">Format: "x,y". If you chose "custom" as the seed method, provide  the coordinates of the initial seed. (Will be ignored for other methods.)</div></td><td><input type="text" style = "padding: 10px;width: 500px;font-size: 17px;font-family: Raleway;border: 1px solid #aaaaaa;" 
+					placeholder="e.g. 20,20" id="customseed" name="customseed">
+					<br><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="paper-title" style="text-align:center">Anchor Selection Method</div>
+						<div class="paper-authors">Format: "all", or "best". Select whether the simulator uses all anchors to compute location, or only the best DoP combination of anchors.</div></td><td><input type="text" style = "padding: 10px;width: 500px;font-size: 17px;font-family: Raleway;border: 1px solid #aaaaaa;" 
+					placeholder="e.g. all/best" id="dop" name="dop">
+					<br><br>
+					</td>
+				</tr>
+				<td>
+						<div class="paper-title" style="text-align:center">Number of Trials</div>
+						<div class="paper-authors">Format: "trials". Number of trials with Gaussian noise at every sample location (results present the median error value).</div></td><td><input type="text" style = "padding: 10px;width: 500px;font-size: 17px;font-family: Raleway;border: 1px solid #aaaaaa;" 
+					placeholder="e.g. 50" id="count" name="count">
+					<br><br>
+					</td>
+				</tr>
+			</table>
+
+
+			<br><br>
+			<button type="button" id="btn" onclick="validInput()">Simulate!</button>  
+			<div id = "button" style="text-align:center" >
+				(please allow a few minutes of calculation time)
+				<!-- <script>
+					document.addEventListener("DOMContentLoaded", function(event) {
+						document.getElementById("btn").disabled = false;
+						console.log("set btn to false");
+					  });
+					</script> -->
+				
+			</div>
+			<hr>
+
+			<div style="margin-top: 20px;" >
+				<label id="instruction" style="font-size: 20px;">Results will appear below.</label>
+				<br><br>Activity Indicator: 
+				<div id='meter' style = "border:1px solid #000;width:100px;">
+					<div id='progress' style = "background:#333;height:10px;width:0%;display:block;">
+					</div>
+				</div>
+			</div>
+
+			<div style="margin-top: 20px;" >
+				<label style="font-size:15px;">(If your result is a plain grey graph, then every error value exceeds the maximum threshold.)</label>
+			</div>
+
+			<div class = "graphwrapper" style="position: relative;margin-top: 50px;" >	 
+				<!-- <canvas class = "overlaygraph" id="canvas" alt="" style="height: 300px;width: 300px;background-color:powderblue;position: absolute; top: 0; left: 0;"></canvas> -->
+		     	<!-- <div class="overlaygraph" alt="" style="height: 300px;width: 300px;background-color: lightblue;position: absolute; top: 0; left: 0;" id = "map"></div> -->
+				<div class="overlaygraph" alt="" id="contour" style="width:500px;height:500px;position: absolute; top: 0; left: 0;"></div>
+				<canvas class = "overlaygraph" id="canvas" alt="" style="height: 320px;width: 335px;margin-top: 100px;margin-left:80px;position: absolute; top: 0; left: 0;"></canvas>
+			</div>
+
+			
+
+		</div>
+		<!-- <script type="text/javascript" src="scripts/app.js"></script> -->
+		<script type="text/javascript" src="contour_room_VM/scripts/app.js"></script>
+			
+			</div>
+			</div>
+			
+			
+			
+			
+			
+			</td>
+			</tr>
+		</table>
+            
+		<!-- <script type="text/javascript" src="indoorbackend/scripts/app.js"></script> -->
+	</body>
+	<!-- <script type="text/javascript" src="app.js"></script> -->
+</html>
