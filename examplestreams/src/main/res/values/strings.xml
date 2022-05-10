@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ExampleInputOutputStream</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="serial_port">localization conference room demo</string>
+    <string name="anchor0">You are at anchor 0</string>
+    <string name="anchor1">You are at anchor 1</string>
+    <string name="anchor2">You are at anchor 2</string>
+    <string name="anchor3">You are at anchor 3</string>
+    <string name="center">Center of the room</string>
+    <string name="image_description">Map of conference room in Klaus3337.</string>
+    <string name="snackbar">A snackbar.</string>
+    <string name="packageroom">A delivery address you can use in case the package room in your complex is messy.</string>
+</resources>
