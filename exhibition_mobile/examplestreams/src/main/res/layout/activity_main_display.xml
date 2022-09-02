@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myCoordinatorLayoutMainDisplay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".MainDisplay">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="fsfggdfsdsdsfgfgdfgdfg"-->
+<!--        tools:layout_editor_absoluteX="168dp"-->
+<!--        tools:layout_editor_absoluteY="358dp" />-->
+
+
+    <!--        android:layout_width="409dp"-->
+    <!--        android:layout_height="729dp"-->
+    <!--        android:orientation="vertical"-->
+    <!--        tools:layout_editor_absoluteX="1dp"-->
+    <!--        tools:layout_editor_absoluteY="1dp"-->
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        tools:context="com.felhr.examplestreams.MainActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                tools:layout_editor_absoluteX="188dp"
+                tools:layout_editor_absoluteY="353dp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_media_pause" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                android:layout_gravity="bottom" />
+
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
+
+<!--</android.support.constraint.ConstraintLayout>-->

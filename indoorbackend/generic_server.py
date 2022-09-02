@@ -28,10 +28,12 @@ class MyServer(BaseHTTPRequestHandler):
                         line = parse_qs(parsed_url.query)['line'][0]
                         line = line.replace('\x00','') #remove all the NUL characters
                         line = line[:-1]#remove the last ";"
-                        print("line: ",line)
+                        # print("line: ",line)
                         tagLoc = generic_solver.NSDI_read_TDoA_new(line)
-                        print('tagLoc: ',tagLoc)
-                        # print("tagLoc: ",tagLoc)
+  
+                        tagLoc=[int(ele) for ele in tagLoc]
+                        # tagLoc=[20000,20000]
+                        # print('tagLoc: ',tagLoc)
                         if len(tagLoc) == 2:
                             # return tagLoc
                             self.send_response(200)

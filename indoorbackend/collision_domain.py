@@ -185,5 +185,6 @@ while len(group_record)<len(groups):
 print("time: ",time_count)
 print("cdr: ",cdr)
 #calculate time cost for per device per round of communication
-# pdpr=time_count/
+pdpr=time_count/cdr
+print("pdpr: ",pdpr)
 

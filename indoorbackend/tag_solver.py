@@ -20,14 +20,17 @@ def tag_solver(estimation,args):
         if len(args) == 5:
             r = args[4]
         tag_locations = []
-        # print("zero_coor: ",zero_coor)
 
+        # print("zero_coor: ",zero_coor)
+        # print("estimation: ",estimation)
+        # print("anchor: ",anchor_locations)
         for i in range(len(DDoA)):
             for j in range(len(DDoA)):
-                for coor in zero_coor:
-                    if (DDoA[i][j] != 0 and DDoA[i][j] != -0) or (i == coor[0] and j == coor[1]):
-                        tag_locations.append( -np.sqrt( (estimation[0]-anchor_locations[i][0])**2 + (estimation[1]-anchor_locations[i][1])**2 ) 
-                        + np.sqrt( (estimation[0]-anchor_locations[j][0])**2 + (estimation[1]-anchor_locations[j][1])**2 )-DDoA[i][j])
+                # for coor in zero_coor:
+                    #if (DDoA[i][j] != 0 and DDoA[i][j] != -0) or (i == coor[0] and j == coor[1]):
+                if DDoA[i][j]!=0:
+                    tag_locations.append( -np.sqrt( (estimation[0]-anchor_locations[i][0])**2 + (estimation[1]-anchor_locations[i][1])**2 ) 
+                    + np.sqrt( (estimation[0]-anchor_locations[j][0])**2 + (estimation[1]-anchor_locations[j][1])**2 )-DDoA[i][j])
 
                         # tag_locations.append(estimation[0]>0)
                         # tag_locations.append(estimation[0]<400)
@@ -45,7 +48,7 @@ def tag_solver(estimation,args):
     # print("temp_result: ",temp_result)
     result =np.empty((0,2))
     #plt.scatter(np.vstack((result,temp_result.x))[:,0],np.vstack((result,temp_result.x))[:,1])
-    print('result: ',np.transpose(np.vstack((result,temp_result.x))))
+    # print('result: ',np.transpose(np.vstack((result,temp_result.x))))
     return np.transpose(np.vstack((result,temp_result.x)))
 
 # anchor_locations = np.array([[0,0],[10,0],[0,10],[10,10]])

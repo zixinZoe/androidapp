@@ -17,21 +17,28 @@ def tag_solver(estimation,args):
         anchor_locations = args[1]
         # print("anchors: ",anchor_locations)
         zero_coor = args[2] #where tdoa = 0
+        # print('zero_coor: ',zero_coor)
         tag_locations = []
-
+        # print('estimation: ',estimation)
         for i in range(len(DDoA)):
             for j in range(len(DDoA)):
                 # if DDoA[i][j] != 0:
                 for coor in zero_coor:
-                    if DDoA[i][j] != 0 or i == coor[0] and j == coor[1]:
+                    # print("here1")
+                    # print("i: ",i)
+                    # print('j: ',j)
+                    # print('DDoA[i][j]: ',DDoA[i][j])
+                    if DDoA[i][j] != 0 or (i == coor[0] and j == coor[1]):
+                        # print('here2!!!!!!!!!!!!!!!!')
                         tag_locations.append( -np.sqrt( (estimation[0]-anchor_locations[i][0])**2 + (estimation[1]-anchor_locations[i][1])**2 + (estimation[2]-anchor_locations[i][2])**2 ) 
                         + np.sqrt( (estimation[0]-anchor_locations[j][0])**2 + (estimation[1]-anchor_locations[j][1])**2 + (estimation[2]-anchor_locations[j][2])**2 )-DDoA[i][j])
+                        # print("tag_locations: ",tag_locations)
         return tag_locations
 
     temp_result = scipy.optimize.root(solve_fun,estimation,args,method='lm')
     result =np.empty((0,3))
     #plt.scatter(np.vstack((result,temp_result.x))[:,0],np.vstack((result,temp_result.x))[:,1])
-    # print('result: ',np.transpose(np.vstack((result,temp_result.x))))
+    print('result: ',np.transpose(np.vstack((result,temp_result.x))))
     return np.transpose(np.vstack((result,temp_result.x)))
 
 # anchor_locations = np.array([[0,0,0],[10,0,0],[0,10,0],[0,0,10]])
